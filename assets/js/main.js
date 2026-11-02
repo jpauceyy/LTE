@@ -1,7 +1,8 @@
 (function(){
   var root=document.documentElement;
   root.classList.remove('no-js');root.classList.add('js');
-  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // the site animates for every visitor, regardless of the OS 'reduce motion' setting (owner's choice)
+  var reduce=false;
   if(!reduce) root.classList.add('motion');
   var clamp=function(v){return Math.max(0,Math.min(1,v))};
   var NS='http://www.w3.org/2000/svg';
@@ -161,7 +162,7 @@
     orbRaf=moving&&!document.hidden?requestAnimationFrame(orbStep):0;
   }
   function wakeOrbs(){if(!orbRaf) orbRaf=requestAnimationFrame(orbStep)}
-  if(orbEls.length===2&&!reduce&&window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+  if(orbEls.length===2&&window.matchMedia('(hover:hover) and (pointer:fine)').matches){
     addEventListener('pointermove',function(e){tgt.x=e.clientX;tgt.y=e.clientY;wakeOrbs()},{passive:true});
   }
 

@@ -297,7 +297,6 @@ input[type=range]{width:100%;margin-top:16px;accent-color:var(--lime);height:28p
 .mq{position:relative;margin-top:clamp(18px,3vw,32px);height:clamp(64px,11.5vw,166px);overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent);mask:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent)}
 .mq-track{position:absolute;left:0;top:0;display:flex;width:max-content;will-change:transform;animation:mqRun 34s linear infinite}
 @keyframes mqRun{to{transform:translate3d(-25%,0,0)}}
-@media(prefers-reduced-motion:reduce){.mq-track{animation-duration:90s}}
 .mq-item{display:inline-flex;align-items:center;gap:.22em;padding-right:.22em;font:800 clamp(5rem,15vw,13.5rem)/.86 var(--sans);letter-spacing:-.05em;text-transform:uppercase;white-space:nowrap;background:linear-gradient(180deg,#4A9CFF 0%,#2A78F0 38%,rgba(10,91,232,.35) 78%,rgba(10,91,232,0) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
 .mq-mark{display:inline-block;width:.62em;aspect-ratio:420/370;background:var(--logo-a) center/contain no-repeat,var(--logo-l) center/contain no-repeat;opacity:.85;transform:translateY(-.06em)}
 
@@ -346,7 +345,6 @@ input[type=range]{width:100%;margin-top:16px;accent-color:var(--lime);height:28p
 /* number tweening */
 .tick{display:inline-block;transition:transform .2s}
 .tick.bump{transform:translateY(-3px)}
-@media (prefers-reduced-motion:reduce){.spark g.last rect,.plan .tag::after,.final-card::before{animation:none}.btn::after{display:none}}
 
 /* ===== founder / about blocks ===== */
 .founder{display:grid;gap:32px;align-items:center}
@@ -460,7 +458,6 @@ input[type=range]{width:100%;margin-top:16px;accent-color:var(--lime);height:28p
 .lime-panel .lede-w{margin-top:20px;color:rgba(255,255,255,.92);max-width:60ch;font-size:1.06rem}
 @media(min-width:860px){.lime-cols.four{grid-template-columns:repeat(4,1fr);gap:32px}}
 @media(min-width:560px) and (max-width:859px){.lime-cols.four{grid-template-columns:1fr 1fr}}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 
 
 /* ===== splash: candles build an uptrend, the logo draws in, then the curtain lifts ===== */
@@ -486,7 +483,6 @@ input[type=range]{width:100%;margin-top:16px;accent-color:var(--lime);height:28p
 @keyframes spOut{0%{opacity:1;transform:none}100%{opacity:0;transform:scale(1.04);visibility:hidden}}
 .splash .sp-in{animation:spLift .7s cubic-bezier(.7,0,.3,1) 2.05s forwards}
 @keyframes spLift{to{transform:translateY(-18px)}}
-@media(prefers-reduced-motion:reduce){.splash{display:none}}
 
 /* ===== smooth cross-fade between pages (supporting browsers) ===== */
 @view-transition{navigation:auto}
@@ -494,8 +490,36 @@ input[type=range]{width:100%;margin-top:16px;accent-color:var(--lime);height:28p
 ::view-transition-new(root){animation:vtIn .45s cubic-bezier(.2,.8,.2,1) both}
 @keyframes vtOut{to{opacity:0;transform:translateY(-6px)}}
 @keyframes vtIn{from{opacity:0;transform:translateY(10px)}}
-@media(prefers-reduced-motion:reduce){::view-transition-old(root),::view-transition-new(root){animation:none}}
 
 /* ===== cursor-lit card edge: the border catches the light where the pointer is ===== */
 .tilt::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;opacity:0;transition:opacity .35s;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(120,190,255,.85),rgba(74,156,255,.2) 40%,transparent 70%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)}
 .tilt:hover::before{opacity:1}
+
+/* ===== Apple-style scroll choreography =====
+   Driven by the scroll position itself (CSS scroll-driven animations): runs off the main thread,
+   reverses when you scroll back up. Uses the individual scale/translate properties so it layers
+   on top of the existing reveal + tilt transforms instead of fighting them.
+   Browsers without support (e.g. Firefox today) simply show the page as before. */
+@supports (animation-timeline: view()){
+  /* headlines: soft-focus and slightly small, then settle sharp as they arrive */
+  .motion .head h2,.motion .finale h2{animation:apHead linear both;animation-timeline:view();animation-range:entry 10% cover 38%}
+  @keyframes apHead{from{scale:.9;filter:blur(10px);opacity:.15}to{scale:1;filter:none;opacity:1}}
+  /* supporting copy trails the headline a beat later */
+  .motion .head p{animation:apCopy linear both;animation-timeline:view();animation-range:entry 30% cover 42%}
+  @keyframes apCopy{from{translate:0 28px;opacity:0}to{translate:none;opacity:1}}
+  /* card groups rise and grow into place, like product tiles */
+  .motion :is(.bento,.mk-grid,.revs,.gets,.plans,.prin-grid,.steps3,.focus,.stat-row){animation:apTiles linear both;animation-timeline:view();animation-range:entry 0% cover 30%}
+  @keyframes apTiles{from{scale:.9;translate:0 70px}to{scale:1;translate:none}}
+  /* hero pieces: zoom up from slightly small */
+  .motion :is(.chat,.slider-card,.portrait-wrap){animation:apZoom linear both;animation-timeline:view();animation-range:entry 0% cover 35%}
+  @keyframes apZoom{from{scale:.84;filter:brightness(.6)}to{scale:1;filter:none}}
+  /* hero: content eases back and dims as you scroll away from it */
+  .motion :is(.hero,.page-hero)>.wrap{animation:apExit linear both;animation-timeline:view();animation-range:exit 0% exit 90%}
+  @keyframes apExit{to{scale:.92;opacity:0;translate:0 -40px;filter:blur(6px)}}
+  /* each section gently recedes as the next one takes over */
+  .motion .sec>.wrap{animation:apRecede linear both;animation-timeline:view();animation-range:exit 25% exit 100%}
+  @keyframes apRecede{to{scale:.96;opacity:.25}}
+  /* closing card opens up from a smaller frame */
+  .motion .final-card{animation:apFinal linear both;animation-timeline:view();animation-range:entry 0% cover 45%}
+  @keyframes apFinal{from{scale:.8;opacity:.3;border-radius:44px}to{scale:1;opacity:1}}
+}

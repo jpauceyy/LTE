@@ -76,20 +76,13 @@
 
 
 
-  // footer marquee
+  // footer marquee: autoplays in CSS; scrolling briefly speeds it up and steers its direction
   (function(){
-    var tr=document.getElementById('mqTrack');if(!tr||reduce) return;
-    var x=0,dir=-1,boost=0,last=scrollY,w=0,vis=false,raf=0;
-    function measure(){w=tr.scrollWidth/4}
-    measure();addEventListener('resize',measure);
-    if('IntersectionObserver' in window) new IntersectionObserver(function(es){vis=es[0].isIntersecting;if(vis&&!raf) raf=requestAnimationFrame(loop)}).observe(tr);
-    else vis=true;
-    addEventListener('scroll',function(){var d=scrollY-last;last=scrollY;if(d) dir=d>0?-1:1;boost=Math.min(14,boost+Math.abs(d)*0.08)},{passive:true});
-    function loop(){
-      x+=dir*(0.6+boost);boost*=0.92;if(x<=-w) x+=w;if(x>0) x-=w;tr.style.setProperty('--mqx',x.toFixed(1)+'px');
-      raf=vis?requestAnimationFrame(loop):0;
-    }
-    if(vis) raf=requestAnimationFrame(loop);
+    var tr=document.getElementById('mqTrack');if(!tr||reduce||!tr.getAnimations) return;
+    var anim=tr.getAnimations()[0];if(!anim) return;
+    var dir=1,boost=0,last=scrollY,raf=0;
+    function ease(){boost*=0.92;if(boost<0.02) boost=0;anim.playbackRate=dir*(1+boost);raf=boost?requestAnimationFrame(ease):0}
+    addEventListener('scroll',function(){var d=scrollY-last;last=scrollY;if(d) dir=d>0?1:-1;boost=Math.min(5,boost+Math.abs(d)*0.03);if(!raf) raf=requestAnimationFrame(ease)},{passive:true});
   })();
   // slider
   var acct=document.getElementById('acct'),fmt=function(n){return '$'+Math.round(n).toLocaleString('en-GB')};

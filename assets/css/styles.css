@@ -295,7 +295,9 @@ input[type=range]{width:100%;margin-top:16px;accent-color:var(--lime);height:28p
 .f-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;margin-top:22px;padding-top:18px;border-top:1px solid var(--line);font-size:.84rem;color:var(--soft)}
 /* giant marquee wordmark, cropped by the card's lower edge */
 .mq{position:relative;margin-top:clamp(18px,3vw,32px);height:clamp(64px,11.5vw,166px);overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent);mask:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent)}
-.mq-track{position:absolute;left:0;top:0;display:flex;width:max-content;will-change:transform;transform:translateX(var(--mqx,0px))}
+.mq-track{position:absolute;left:0;top:0;display:flex;width:max-content;will-change:transform;animation:mqRun 34s linear infinite}
+@keyframes mqRun{to{transform:translate3d(-25%,0,0)}}
+@media(prefers-reduced-motion:reduce){.mq-track{animation-duration:90s}}
 .mq-item{display:inline-flex;align-items:center;gap:.22em;padding-right:.22em;font:800 clamp(5rem,15vw,13.5rem)/.86 var(--sans);letter-spacing:-.05em;text-transform:uppercase;white-space:nowrap;background:linear-gradient(180deg,#4A9CFF 0%,#2A78F0 38%,rgba(10,91,232,.35) 78%,rgba(10,91,232,0) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
 .mq-mark{display:inline-block;width:.62em;aspect-ratio:420/370;background:var(--logo-a) center/contain no-repeat,var(--logo-l) center/contain no-repeat;opacity:.85;transform:translateY(-.06em)}
 

@@ -37,8 +37,17 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/styles.css">
+<script>/* splash once per visit; skipped for reduced motion */try{var d=document.documentElement;if(sessionStorage.getItem('lte-splash')||matchMedia('(prefers-reduced-motion: reduce)').matches)d.classList.add('no-splash');else{sessionStorage.setItem('lte-splash','1');d.classList.add('has-splash')}}catch(e){}</script>
+
 </head>
 <body>
+<div class="splash" id="splash" aria-hidden="true">
+  <div class="sp-in">
+    <div class="sp-chart"><i class="up" style="--i:0;--b:6%;--h:16%;--wl:2%;--wh:25%"></i><i class="dn" style="--i:1;--b:13%;--h:9%;--wl:8%;--wh:17%"></i><i class="up" style="--i:2;--b:13%;--h:17%;--wl:10%;--wh:25%"></i><i class="up" style="--i:3;--b:30%;--h:14%;--wl:26%;--wh:23%"></i><i class="dn" style="--i:4;--b:33%;--h:11%;--wl:28%;--wh:19%"></i><i class="up" style="--i:5;--b:33%;--h:19%;--wl:30%;--wh:27%"></i><i class="up" style="--i:6;--b:52%;--h:11%;--wl:47%;--wh:21%"></i><i class="dn" style="--i:7;--b:54%;--h:9%;--wl:50%;--wh:16%"></i><i class="up" style="--i:8;--b:54%;--h:18%;--wl:51%;--wh:26%"></i><i class="up" style="--i:9;--b:72%;--h:12%;--wl:67%;--wh:21%"></i><i class="dn" style="--i:10;--b:75%;--h:9%;--wl:71%;--wh:16%"></i><i class="up" style="--i:11;--b:75%;--h:20%;--wl:73%;--wh:26%"></i></div>
+    <div class="sp-mark"><i class="m-l"></i><i class="m-a"></i></div>
+    <div class="sp-bar"><i></i></div>
+  </div>
+</div>
 <a class="skip" href="#main">Skip to content</a>
 <div class="glow-fallback" aria-hidden="true"></div>
 <div class="orbs" aria-hidden="true"><i></i><i></i></div>

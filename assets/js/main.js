@@ -60,14 +60,18 @@
   })(big||document.createElement('p'));
   (big?big.querySelectorAll('.w'):[]).forEach(function(s){s.style.setProperty('--k',(s.dataset.k/words).toFixed(3))});
 
+  // when the splash is showing, hold the page's own entrance until it lifts
+  var introDelay=root.classList.contains('has-splash')?1750:0;
+  function afterIntro(fn){introDelay?setTimeout(fn,introDelay):fn()}
+  if(introDelay) setTimeout(function(){var s=document.getElementById('splash');s&&s.remove()},3000);
   // logo animations play when each mark comes into view
   var marks=document.querySelectorAll('.lte-mark');
-  if('IntersectionObserver' in window && !reduce){var mio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('go');mio.unobserve(e.target)}})},{threshold:.3});marks.forEach(function(m){mio.observe(m)})}
+  if('IntersectionObserver' in window && !reduce){var mio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('go');mio.unobserve(e.target)}})},{threshold:.3});afterIntro(function(){marks.forEach(function(m){mio.observe(m)})})}
   // reveals
   var targets=document.querySelectorAll('[data-rise]');
   if('IntersectionObserver' in window && !reduce){
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15,rootMargin:'0px 0px -6% 0px'});
-    targets.forEach(function(t){io.observe(t)});
+    afterIntro(function(){targets.forEach(function(t){io.observe(t)})});
   } else targets.forEach(function(t){t.classList.add('in')});
 
 
@@ -75,15 +79,17 @@
   // footer marquee
   (function(){
     var tr=document.getElementById('mqTrack');if(!tr||reduce) return;
-    var x=0,dir=-1,boost=0,last=scrollY,w=0,vis=false;
+    var x=0,dir=-1,boost=0,last=scrollY,w=0,vis=false,raf=0;
     function measure(){w=tr.scrollWidth/4}
     measure();addEventListener('resize',measure);
-    if('IntersectionObserver' in window) new IntersectionObserver(function(es){vis=es[0].isIntersecting}).observe(tr);
+    if('IntersectionObserver' in window) new IntersectionObserver(function(es){vis=es[0].isIntersecting;if(vis&&!raf) raf=requestAnimationFrame(loop)}).observe(tr);
+    else vis=true;
     addEventListener('scroll',function(){var d=scrollY-last;last=scrollY;if(d) dir=d>0?-1:1;boost=Math.min(14,boost+Math.abs(d)*0.08)},{passive:true});
-    (function loop(){
-      if(vis){x+=dir*(0.6+boost);boost*=0.92;if(x<=-w) x+=w;if(x>0) x-=w;tr.style.setProperty('--mqx',x.toFixed(1)+'px')}
-      requestAnimationFrame(loop);
-    })();
+    function loop(){
+      x+=dir*(0.6+boost);boost*=0.92;if(x<=-w) x+=w;if(x>0) x-=w;tr.style.setProperty('--mqx',x.toFixed(1)+'px');
+      raf=vis?requestAnimationFrame(loop):0;
+    }
+    if(vis) raf=requestAnimationFrame(loop);
   })();
   // slider
   var acct=document.getElementById('acct'),fmt=function(n){return '$'+Math.round(n).toLocaleString('en-GB')};
@@ -147,51 +153,47 @@
   }
 
 
-  // background orbs: follow the cursor with an easy lag (the second orb trails further behind)
+  // background orbs: follow the cursor with an easy lag (the second orb trails further behind).
+  // Moves the two elements with transforms only (no :root variables) and sleeps once they settle.
   var scrollPhase=0,scrollProg=0;
-  var gm={x:innerWidth*0.62,y:innerHeight*0.32,on:false};
-  var o1={x:gm.x,y:gm.y},o2={x:innerWidth*0.2,y:innerHeight*0.7};
-  var fine=window.matchMedia('(hover:hover) and (pointer:fine)').matches;
-  if(fine&&!reduce){
-    addEventListener('pointermove',function(e){gm.on=true;gm.x=e.clientX;gm.y=e.clientY},{passive:true});
-    document.documentElement.addEventListener('pointerleave',function(){gm.on=false});
+  var orbEls=document.querySelectorAll('.orbs i');
+  var o1={x:innerWidth*0.62,y:innerHeight*0.32},o2={x:innerWidth*0.2,y:innerHeight*0.7},tgt={x:o1.x,y:o1.y};
+  var orbRaf=0;
+  function place(el,p){el.style.transform='translate3d('+p.x.toFixed(1)+'px,'+p.y.toFixed(1)+'px,0) translate(-50%,-50%)'}
+  function orbStep(){
+    o1.x+=(tgt.x-o1.x)*0.08;o1.y+=(tgt.y-o1.y)*0.08;
+    o2.x+=(o1.x-o2.x)*0.035;o2.y+=(o1.y-o2.y)*0.035;
+    place(orbEls[0],o1);place(orbEls[1],o2);
+    var moving=Math.abs(tgt.x-o1.x)+Math.abs(tgt.y-o1.y)+Math.abs(o1.x-o2.x)+Math.abs(o1.y-o2.y)>1.5;
+    orbRaf=moving&&!document.hidden?requestAnimationFrame(orbStep):0;
   }
-  function setOrbs(){
-    root.style.setProperty('--o1x',o1.x.toFixed(1)+'px');root.style.setProperty('--o1y',o1.y.toFixed(1)+'px');
-    root.style.setProperty('--o2x',o2.x.toFixed(1)+'px');root.style.setProperty('--o2y',o2.y.toFixed(1)+'px');
+  function wakeOrbs(){if(!orbRaf) orbRaf=requestAnimationFrame(orbStep)}
+  if(orbEls.length===2&&!reduce&&window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+    addEventListener('pointermove',function(e){tgt.x=e.clientX;tgt.y=e.clientY;wakeOrbs()},{passive:true});
   }
-  function orbLoop(t){
-    var tx,ty;
-    if(gm.on){tx=gm.x;ty=gm.y}
-    else{t*=0.00015;tx=innerWidth*(0.55+0.12*Math.sin(t));ty=innerHeight*(0.4+0.12*Math.cos(t*1.3))} // gentle idle drift
-    o1.x+=(tx-o1.x)*0.08;o1.y+=(ty-o1.y)*0.08;
-    o2.x+=(o1.x-o2.x)*0.03;o2.y+=(o1.y-o2.y)*0.03;
-    setOrbs();
-  }
-  var running=true;
-  document.addEventListener('visibilitychange',function(){running=!document.hidden});
-  if(reduce){setOrbs()} else (function loop(ts){if(running) orbLoop(ts||0);requestAnimationFrame(loop)})(0);
 
   // scroll: echo headline, aurora visibility, scrubs, mobile bar
   var heroEl=document.getElementById('top'),h1=document.getElementById('h1'),lastY=scrollY,vel=0,scrubs=document.querySelectorAll('[data-scrub]'),lines=document.querySelectorAll('[data-line]'),lime=document.getElementById('limePanel'),mbar=document.getElementById('mbar'),fin=document.getElementById('final-h');
-  var auroraSecs=document.querySelectorAll('[data-aurora]');
+  var hdrEl=document.querySelector('.hdr'),scrollRaf=0,idle=0;
   function frame(){
     var y=scrollY,vh=innerHeight;
     if(!reduce){
       vel+=((y-lastY)-vel)*0.25;lastY=y;
       h1&&h1.style.setProperty('--v',Math.max(-14,Math.min(14,vel)).toFixed(2));
       scrollPhase=y*0.0009;
-      scrollProg=y/Math.max(1,document.documentElement.scrollHeight-vh);root.style.setProperty('--sp',scrollProg.toFixed(4));
-      var ang=scrollProg*Math.PI*2;
+      scrollProg=y/Math.max(1,document.documentElement.scrollHeight-vh);hdrEl&&hdrEl.style.setProperty('--sp',scrollProg.toFixed(4));
       scrubs.forEach(function(el){var r=el.getBoundingClientRect();el.style.setProperty('--p',clamp((vh*0.95-r.top)/(vh*0.65)).toFixed(3))});
       lines.forEach(function(el){var r=el.getBoundingClientRect();el.style.setProperty('--p',clamp((vh*0.62-r.top)/r.height).toFixed(3))});
       if(lime){var lr=lime.getBoundingClientRect();lime.style.setProperty('--p',clamp((vh*0.85-lr.top)/(lr.height*0.75)).toFixed(3));}
     }
-    var on=0;auroraSecs.forEach(function(s){var r=s.getBoundingClientRect();if(s.dataset.aurora==='1'&&r.top<vh*0.6&&r.bottom>vh*0.3) on=1});
-    root.style.setProperty('--ao',on?1:0.5);
     if(heroEl){var hr=heroEl.getBoundingClientRect();heroEl.style.setProperty('--hp',clamp(-hr.top/(hr.height*0.8)).toFixed(3));}
     mbar.classList.toggle('show',y>vh*0.85&&(!fin||fin.getBoundingClientRect().top>vh*0.5));
-    requestAnimationFrame(frame);
+    // keep ticking only while the page moves or the headline echo is still settling
+    if(y===lastStill&&Math.abs(vel)<0.05){if(++idle>2){scrollRaf=0;return}} else idle=0;
+    lastStill=y;scrollRaf=requestAnimationFrame(frame);
   }
-  requestAnimationFrame(frame);
+  var lastStill=-1;
+  function wake(){if(!scrollRaf){idle=0;scrollRaf=requestAnimationFrame(frame)}}
+  addEventListener('scroll',wake,{passive:true});addEventListener('resize',wake);
+  wake();
 })();

@@ -147,92 +147,30 @@
   }
 
 
-  // aurora ribbons
-  var cv=document.getElementById('aurora'),ctx=cv.getContext&&cv.getContext('2d'),W=0,H=0,dpr=Math.min(window.devicePixelRatio||1,1.5);
-  function size(){W=innerWidth;H=innerHeight;cv.width=W*dpr;cv.height=H*dpr;ctx&&ctx.setTransform(dpr,0,0,dpr,0,0)}
+  // background orbs: follow the cursor with an easy lag (the second orb trails further behind)
   var scrollPhase=0,scrollProg=0;
-  // ---- light-strand bundle (modelled on the reference video) ----
-  var cv2=document.getElementById('aurora2'),ctx2=cv2&&cv2.getContext&&cv2.getContext('2d');
-  function size2(){if(!ctx2) return;cv2.width=Math.max(1,Math.round(innerWidth/3));cv2.height=Math.max(1,Math.round(innerHeight/3))}
-  size2();addEventListener('resize',size2);
-  function R(seed){return function(){seed=(seed*16807)%2147483647;return (seed-1)/2147483646}}
-  var rr=R(42),strands=[],stars=[],nS=innerWidth<700?110:230;
-  for(var si=0;si<nS;si++){var c=rr();strands.push({r:Math.pow(rr(),0.75),th:rr()*Math.PI*2,c:c,a:0.22+rr()*0.55,sp:0.5+rr()*1.0,tw:3.2+rr()*2.2})}
-  for(var sj=0;sj<70;sj++) stars.push({x:rr(),y:rr(),z:0.25+rr()*0.75});
-  var P=[[-3.2,-2.9,0.8],[-0.4,-2.2,2.6],[1.6,1.4,-0.4],[5.4,3.6,-2.6]];
-  var STEPS=innerWidth<700?44:64,CP=[],CT1=[],CT2=[];
-  (function frames(){
-    for(var st=0;st<=STEPS;st++){
-      var s=st/STEPS,u=1-s,a=u*u*u,b=3*u*u*s,c=3*u*s*s,d=s*s*s;
-      var C=[0,0,0],T=[0,0,0];
-      for(var q=0;q<3;q++){C[q]=a*P[0][q]+b*P[1][q]+c*P[2][q]+d*P[3][q];T[q]=3*u*u*(P[1][q]-P[0][q])+6*u*s*(P[2][q]-P[1][q])+3*s*s*(P[3][q]-P[2][q])}
-      var tl=Math.hypot(T[0],T[1],T[2])||1;T=[T[0]/tl,T[1]/tl,T[2]/tl];
-      var N1=[T[1],-T[0],0],nl=Math.hypot(N1[0],N1[1])||1;N1=[N1[0]/nl,N1[1]/nl,0];
-      var N2=[T[1]*N1[2]-T[2]*N1[1],T[2]*N1[0]-T[0]*N1[2],T[0]*N1[1]-T[1]*N1[0]];
-      CP.push(C);CT1.push(N1);CT2.push(N2);
-    }
-  })();
-  // keyframes along the page: [scroll, rotZ, rotY, x, y, z, focus]
-  var KF=[[0,0.15,0,2.73,-0.4,0,1],[0.1,-1.15,0.35,1.5,0.7,0.6,0.85],[0.22,2.3,-0.4,-1.3,0.4,2.7,0.08],[0.36,-2.5,0.5,0.2,0.3,1.4,0.22],[0.5,-0.55,0.2,3.3,-2.7,-0.6,0.92],[0.64,2.8,-0.3,-0.5,-1.5,0.5,0.55],[0.8,-2.2,0.4,-1.7,1.3,2.3,0.18],[1,1.5,0,0.1,-0.7,0.3,0.65]];
-  var spS=0,cur=[0,0,0,0,0,0,1],pt=[0,0];
-  // mouse steering for the glow (desktop only)
-  var gm={x:0,y:0,tx:0,ty:0,on:false,px:0,py:0};
-  if(window.matchMedia('(hover:hover) and (pointer:fine)').matches&&!reduce){
-    addEventListener('pointermove',function(e){gm.on=true;gm.tx=e.clientX/innerWidth-0.5;gm.ty=e.clientY/innerHeight-0.5;gm.px=e.clientX;gm.py=e.clientY},{passive:true});
-    document.documentElement.addEventListener('pointerleave',function(){gm.tx=0;gm.ty=0;gm.on=false});
+  var gm={x:innerWidth*0.62,y:innerHeight*0.32,on:false};
+  var o1={x:gm.x,y:gm.y},o2={x:innerWidth*0.2,y:innerHeight*0.7};
+  var fine=window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+  if(fine&&!reduce){
+    addEventListener('pointermove',function(e){gm.on=true;gm.x=e.clientX;gm.y=e.clientY},{passive:true});
+    document.documentElement.addEventListener('pointerleave',function(){gm.on=false});
   }
-  function drawAurora(time){
-    if(!ctx) return;
-    spS+=(scrollProg-spS)*0.06;
-    for(var k=0;k<KF.length-1&&spS>KF[k+1][0];k++);
-    var A=KF[k],B=KF[Math.min(k+1,KF.length-1)],f=B[0]>A[0]?Math.max(0,Math.min(1,(spS-A[0])/(B[0]-A[0]))):0;f=f*f*(3-2*f);
-    for(var q=1;q<7;q++) cur[q]=A[q]+(B[q]-A[q])*f;
-    gm.x+=(gm.tx-gm.x)*0.05;gm.y+=(gm.ty-gm.y)*0.05;
-    var rz=cur[1]-gm.x*0.35+gm.y*0.25,ry=cur[2]+gm.x*0.75;
-    var cz=Math.cos(rz),sz=Math.sin(rz),cy=Math.cos(ry),sy=Math.sin(ry),tx=cur[3]+gm.x*3.4,ty=cur[4]-gm.y*2.6,tz=cur[5],focus=cur[6];
-    var mob=W<700,FOC=mob?Math.max(W*1.1,H*0.5):Math.min(W,H)*1.1,cx0=W/2,cy0=H/2;
-    if(mob){tx*=0.55;ty-=0.9}
-    function proj(x,y,z){var x1=x*cy+z*sy,z1=-x*sy+z*cy,x2=x1*cz-y*sz+tx,y2=x1*sz+y*cz+ty,dd=9-(z1+tz);if(dd<0.6)dd=0.6;var ff=FOC/dd;pt[0]=cx0+x2*ff;pt[1]=cy0-y2*ff}
-    ctx.clearRect(0,0,W,H);
-    // star specks
-    var sY=scrollY;
-    for(var i=0;i<stars.length;i++){var st=stars[i];var x=(st.x*W)%W,y=((st.y*H-sY*0.06*st.z)%H+H)%H;ctx.fillStyle='rgba(210,230,255,'+(0.18*st.z).toFixed(3)+')';ctx.fillRect(x,y,1.3,1.3)}
-    ctx.globalCompositeOperation='lighter';
-    var tm=time*0.00018;
-    for(var n=0;n<strands.length;n++){
-      var sd=strands[n],x0,y0,x1,y1;
-      ctx.beginPath();
-      for(var j=0;j<=STEPS;j++){
-        var s=j/STEPS,rad=sd.r*(0.04+2.3*Math.pow(s,1.1)),ang=sd.th+s*sd.tw+tm*sd.sp,ca=Math.cos(ang)*rad,sa=Math.sin(ang)*rad,C=CP[j],N1=CT1[j],N2=CT2[j];
-        proj(C[0]+ca*N1[0]+sa*N2[0],C[1]+ca*N1[1]+sa*N2[1],C[2]+ca*N1[2]+sa*N2[2]);
-        if(j===0){ctx.moveTo(pt[0],pt[1]);x0=pt[0];y0=pt[1]} else ctx.lineTo(pt[0],pt[1]);
-      }
-      x1=pt[0];y1=pt[1];
-      var hue=sd.c<0.7?'212,95%,64%':(sd.c<0.9?'200,100%,86%':'190,100%,60%'),al=sd.a*(mob?0.85:1);
-      var g=ctx.createLinearGradient(x0,y0,x1,y1);
-      g.addColorStop(0,'hsla('+hue+','+(al).toFixed(3)+')');
-      g.addColorStop(0.18,'hsla('+hue+','+(al*0.85).toFixed(3)+')');
-      g.addColorStop(0.62,'hsla('+hue+','+(al*0.3).toFixed(3)+')');
-      g.addColorStop(1,'hsla('+hue+',0)');
-      ctx.strokeStyle=g;ctx.lineWidth=sd.c>0.95?1.6:1;ctx.stroke();
-    }
-    // hotspot where the strands converge
-    proj(CP[1][0],CP[1][1],CP[1][2]);
-    var hx=pt[0],hy=pt[1],M=Math.min(W,H),hg=ctx.createRadialGradient(hx,hy,0,hx,hy,M*0.16);
-    var hot=Math.max(0.25,1-spS*6);ctx.globalAlpha=hot;hg.addColorStop(0,'rgba(235,248,255,.95)');hg.addColorStop(0.12,'rgba(150,210,255,.55)');hg.addColorStop(0.45,'rgba(74,156,255,.12)');hg.addColorStop(1,'rgba(74,156,255,0)');
-    ctx.fillStyle=hg;ctx.fillRect(hx-M*0.16,hy-M*0.16,M*0.32,M*0.32);ctx.globalAlpha=1;
-    ctx.globalCompositeOperation='source-over';
-    // soft, out-of-focus copy for the smoky glow and bloom
-    if(ctx2){ctx2.clearRect(0,0,cv2.width,cv2.height);ctx2.drawImage(cv,0,0,cv2.width,cv2.height)}
-    root.style.setProperty('--fo',focus.toFixed(3));
-    proj(CP[Math.round(STEPS*0.45)][0],CP[Math.round(STEPS*0.45)][1],CP[Math.round(STEPS*0.45)][2]);
-    root.style.setProperty('--o1x',pt[0].toFixed(0)+'px');root.style.setProperty('--o1y',pt[1].toFixed(0)+'px');
+  function setOrbs(){
+    root.style.setProperty('--o1x',o1.x.toFixed(1)+'px');root.style.setProperty('--o1y',o1.y.toFixed(1)+'px');
+    root.style.setProperty('--o2x',o2.x.toFixed(1)+'px');root.style.setProperty('--o2y',o2.y.toFixed(1)+'px');
+  }
+  function orbLoop(t){
+    var tx,ty;
+    if(gm.on){tx=gm.x;ty=gm.y}
+    else{t*=0.00015;tx=innerWidth*(0.55+0.12*Math.sin(t));ty=innerHeight*(0.4+0.12*Math.cos(t*1.3))} // gentle idle drift
+    o1.x+=(tx-o1.x)*0.08;o1.y+=(ty-o1.y)*0.08;
+    o2.x+=(o1.x-o2.x)*0.03;o2.y+=(o1.y-o2.y)*0.03;
+    setOrbs();
   }
   var running=true;
   document.addEventListener('visibilitychange',function(){running=!document.hidden});
-  if(ctx){size();addEventListener('resize',size);
-    if(reduce){drawAurora(0)} else (function loop(ts){if(running) drawAurora(ts);requestAnimationFrame(loop)})(0);
-  }
+  if(reduce){setOrbs()} else (function loop(ts){if(running) orbLoop(ts||0);requestAnimationFrame(loop)})(0);
 
   // scroll: echo headline, aurora visibility, scrubs, mobile bar
   var heroEl=document.getElementById('top'),h1=document.getElementById('h1'),lastY=scrollY,vel=0,scrubs=document.querySelectorAll('[data-scrub]'),lines=document.querySelectorAll('[data-line]'),lime=document.getElementById('limePanel'),mbar=document.getElementById('mbar'),fin=document.getElementById('final-h');
@@ -245,8 +183,6 @@
       scrollPhase=y*0.0009;
       scrollProg=y/Math.max(1,document.documentElement.scrollHeight-vh);root.style.setProperty('--sp',scrollProg.toFixed(4));
       var ang=scrollProg*Math.PI*2;
-      if(gm.on){root.style.setProperty('--o2x',gm.px+'px');root.style.setProperty('--o2y',gm.py+'px')}
-      else{root.style.setProperty('--o2x',(28+Math.cos(ang*1.3)*30).toFixed(2)+'vw');root.style.setProperty('--o2y',(64+Math.sin(ang*1.8)*22).toFixed(2)+'vh')}
       scrubs.forEach(function(el){var r=el.getBoundingClientRect();el.style.setProperty('--p',clamp((vh*0.95-r.top)/(vh*0.65)).toFixed(3))});
       lines.forEach(function(el){var r=el.getBoundingClientRect();el.style.setProperty('--p',clamp((vh*0.62-r.top)/r.height).toFixed(3))});
       if(lime){var lr=lime.getBoundingClientRect();lime.style.setProperty('--p',clamp((vh*0.85-lr.top)/(lr.height*0.75)).toFixed(3));}

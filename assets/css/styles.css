@@ -30,9 +30,10 @@ p{margin:0}
 
 .orbs{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;contain:strict}
 .motion .orbs{animation:orbDrift 26s ease-in-out infinite alternate}
+@media(hover:hover) and (pointer:fine){.motion .orbs{animation:none}} /* mouse users: orbs track the cursor exactly */
 @keyframes orbDrift{0%{transform:translate3d(-3vw,-2vh,0)}50%{transform:translate3d(4vw,3vh,0)}100%{transform:translate3d(-2vw,5vh,0)}}
-.orbs i{position:absolute;will-change:transform;left:0;top:0;width:75vmax;height:75vmax;border-radius:50%;background:radial-gradient(circle,rgba(64,150,255,.24),rgba(64,150,255,.08) 35%,rgba(64,150,255,0) 65%);transform:translate3d(calc(62vw - 50%),calc(32vh - 50%),0)}
-.orbs i+i{width:60vmax;height:60vmax;background:radial-gradient(circle,rgba(0,194,255,.18),rgba(0,194,255,0) 62%);transform:translate3d(calc(20vw - 50%),calc(70vh - 50%),0)}
+.orbs i{position:absolute;will-change:transform;left:0;top:0;width:clamp(380px,40vmax,900px);height:clamp(380px,40vmax,900px);border-radius:50%;background:radial-gradient(circle,rgba(90,170,255,.42),rgba(64,150,255,.16) 32%,rgba(64,150,255,0) 66%);transform:translate3d(calc(62vw - 50%),calc(32vh - 50%),0)}
+.orbs i+i{width:clamp(320px,32vmax,720px);height:clamp(320px,32vmax,720px);background:radial-gradient(circle,rgba(0,194,255,.3),rgba(0,194,255,.08) 34%,rgba(0,194,255,0) 64%);transform:translate3d(calc(20vw - 50%),calc(70vh - 50%),0)}
 .no-js .orbs i{opacity:.6}
 .glow-fallback{position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(60% 50% at 75% 35%,rgba(42,120,240,.18),transparent 70%)}
 

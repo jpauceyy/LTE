@@ -132,7 +132,8 @@ backend:
   name: github
   repo: jpauceyy/LTE
   branch: main
-  auth_endpoint: api/auth   # base_url is set to the site's own origin in admin/index.html
+  base_url: https://learntryearn.vercel.app
+  auth_endpoint: api/auth
 local_backend: true          # "npm run cms:local" + "npm run dev" to edit without logging in
 publish_mode: simple
 media_folder: assets/img/uploads

@@ -176,10 +176,11 @@
     if(form._honey.value) return showSent();
     btn.disabled=true;btn.textContent='Sending…';
     var data={};new FormData(form).forEach(function(v,k){if(k!=='_next') data[k]=v});
-    fetch(form.action.replace('formsubmit.co/','formsubmit.co/ajax/'),{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)})
+    var ctl=window.AbortController?new AbortController():null,timer=ctl&&setTimeout(function(){ctl.abort()},15000);
+    fetch(form.action.replace('formsubmit.co/','formsubmit.co/ajax/'),{method:'POST',signal:ctl&&ctl.signal,headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)})
       .then(function(r){return r.json().then(function(j){if(!r.ok||String(j.success)!=='true') throw new Error(j.message||'Send failed');})})
-      .then(function(){showSent(data.name.split(' ')[0])})
-      .catch(function(){
+      .then(function(){clearTimeout(timer);showSent(data.name.split(' ')[0])})
+      .catch(function(){clearTimeout(timer);
         err.textContent='Sorry, your message didn’t send. Please try again, or message us on Telegram.';
         err.hidden=false;btn.disabled=false;btn.textContent='Send message';
       });

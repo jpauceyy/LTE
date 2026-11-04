@@ -1,0 +1,22 @@
+{
+  "reviews": [
+    {
+      "tag": "Placeholder review",
+      "quote": "[Add a real, verified member review. Get written permission before publishing.]",
+      "name": "[Member first name]",
+      "since": "Member since [month, year]"
+    },
+    {
+      "tag": "Placeholder review",
+      "quote": "[Add a real, verified member review about what they learned, not about profits.]",
+      "name": "[Member first name]",
+      "since": "Member since [month, year]"
+    },
+    {
+      "tag": "Placeholder review",
+      "quote": "[Add a real, verified member review in their own words.]",
+      "name": "[Member first name]",
+      "since": "Member since [month, year]"
+    }
+  ]
+}

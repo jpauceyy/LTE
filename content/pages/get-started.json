@@ -1,0 +1,67 @@
+{
+  "seo": {
+    "title": "How to Get Started with Vantage and MetaTrader | LTE",
+    "description": "Open a Vantage account, verify your ID and log in to MetaTrader 4 or 5 on desktop or mobile. A step-by-step guide from Learn Try Earn."
+  },
+  "top": {
+    "h11": "How to get started, *step by step.*",
+    "p1": "Open an account with our broker, Vantage, verify your details and connect it to MetaTrader 4 or MetaTrader 5. Most people are set up within a working day.",
+    "h31": "Have these ready",
+    "p2": "An email address and phone number, a photo ID (passport, driving licence or national ID card) and a proof of address dated within the last few months, such as a utility bill or bank statement."
+  },
+  "account": {
+    "h21": "Open your Vantage *account.*",
+    "p1": "Four steps from sign-up to a funded account. Exact screens differ a little by country.",
+    "span1": "Step 01",
+    "h31": "Register with *Vantage.*",
+    "p2": "Go to the Open Live Account page using our link, choose an **Individual** account, then enter your country, email, phone number and a password. This creates your Vantage Client Portal login.",
+    "span2": "Step 02",
+    "h32": "Verify your *identity.*",
+    "p3": "Complete your profile and upload a photo ID and proof of address. This is a standard anti-money-laundering (KYC) check. Review usually takes up to one business day, and Vantage emails you when you’re approved.",
+    "span3": "Step 03",
+    "h33": "Choose MT4 or *MT5.*",
+    "p4": "When you set up your trading account, pick the platform (MetaTrader 4 or MetaTrader 5), the account type and your base currency. Not sure? MT5 is the newer platform; either works for gold, silver and crypto.",
+    "span4": "Step 04",
+    "h34": "Fund your *account.*",
+    "p5": "Once approved, deposit from the Client Portal. Start with an amount you can afford to lose, or open a demo account first and practise without real money."
+  },
+  "metatrader": {
+    "h21": "Link it to MetaTrader 4 or *5.*",
+    "p1": "MetaTrader is where you’ll see the charts and place trades. You log in with the trading account Vantage created for you.",
+    "h31": "Find your login details",
+    "p2": "Vantage emails your trading account number and server after setup. You can also find them in the Client Portal under **Accounts**, next to MT4 or MT5.",
+    "h32": "Install MetaTrader",
+    "p3": "Download the version that matches your account (MT4 or MT5) from the Vantage Client Portal, or get the MetaTrader app from the App Store or Google Play.",
+    "h33": "Log in to your account",
+    "p4": "Enter your account number and trading password, then choose the exact Vantage server shown in your portal. Type the password by hand rather than pasting it.",
+    "h34": "On desktop",
+    "p5": "Open MetaTrader, go to **File → Login to Trade Account**, enter your account number and password, select your Vantage server and click Login.",
+    "h35": "On mobile",
+    "p6": "In the MetaTrader app, go to **Settings → New Account** (or Manage Accounts → +), search for **Vantage**, pick your server and sign in.",
+    "h36": "Check it worked",
+    "p7": "You’ll see your balance in the Trade tab and live prices moving. If it says “Invalid account”, check the server name and that MT4/MT5 matches your account."
+  },
+  "section4": {
+    "h21": "Before you trade real money",
+    "p1": "Open a demo account, follow our Telegram entries and practise the process. *Go live only when it makes sense to you.*",
+    "p2": "A demo uses the same platform and prices, so everything you learn carries straight over.",
+    "h31": "Practise on demo",
+    "p3": "Place trades on MetaTrader with no money at risk.",
+    "h32": "Follow the plan",
+    "p4": "Use the structure, entry and stop-loss from each post.",
+    "h33": "Size small",
+    "p5": "Risk a small, fixed share of your account per trade.",
+    "h34": "Review honestly",
+    "p6": "Look back at every trade, including the losers."
+  },
+  "section5": {
+    "h21": "Know the risk before you *deposit.*",
+    "p1": "CFDs are complex instruments and come with a high risk of losing money rapidly due to leverage. **Only trade with money you can afford to lose.**",
+    "p2": "Vantage’s products, terms and protections depend on where you live. Read the risk disclosure and terms for your region before you open an account. Learn Try Earn may earn a referral fee if you sign up through our link."
+  },
+  "section6": {
+    "h21": "Set up, now *learn the process.*",
+    "p1": "Join the Telegram for entries and analysis, and watch the full process live on TikTok.",
+    "p2": "Educational content, not financial advice. Trading involves significant risk."
+  }
+}

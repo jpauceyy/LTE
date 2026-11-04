@@ -1,0 +1,81 @@
+{
+  "seo": {
+    "title": "Learn to Trade Gold & Silver With Structure | LTE",
+    "description": "Learn to trade gold and silver, plus Bitcoin and Ethereum, with structure and risk management. Watch us live on TikTok and join our Telegram."
+  },
+  "top": {
+    "p1": "Learn Try Earn is led by Luke, an independent trader for nearly 10 years. We focus on gold and silver, with some Bitcoin and Ethereum, trade live on TikTok and post every entry in Telegram.",
+    "p2": "Educational content, not financial advice. Trading involves risk."
+  },
+  "about": {
+    "h21": "About Learn Try Earn",
+    "p1": "We’re traders who teach the part most beginners skip: the plan, the stop and the size. Then we use it live, wins and losses included. *No hype.*",
+    "h31": "Our goal",
+    "p2": "To help you build a practical understanding of the markets: preparing a plan, managing risk and reviewing your decisions honestly.",
+    "h32": "Education first",
+    "p3": "Every live session and Telegram post explains the reasoning, so you learn a process instead of copying a number.",
+    "h33": "Discipline over excitement",
+    "p4": "We follow a written plan, wait for our setups and skip trades that don’t fit. Fewer, better decisions."
+  },
+  "founder": {
+    "h21": "Meet Luke, our *founder.*",
+    "p1": "I’m Luke, and I’ve been trading independently for nearly 10 years. I created Learn Try Earn to share my experience, explain the markets I trade and help others build a clearer understanding of trading."
+  },
+  "markets": {
+    "h21": "Precious metals first. Crypto *second.*",
+    "p1": "Gold and silver sit at the centre of everything we teach. Bitcoin and Ethereum are traded occasionally and make up a smaller part of the activity. Here’s what every beginner should know about each.",
+    "p2": "Where most of the analysis and trading happens",
+    "h31": "Gold, *XAUUSD*",
+    "h32": "Silver, *XAGUSD*",
+    "p3": "A smaller part of the activity",
+    "h33": "Bitcoin, *BTCUSD*",
+    "p4": "Trades around the clock and moves further in percentage terms, so a smaller size can carry the same risk.",
+    "h34": "Ethereum, *ETHUSD*",
+    "p5": "Often follows Bitcoin’s direction with larger swings. Driven by sentiment, risk appetite and crypto news."
+  },
+  "risk": {
+    "h21": "How we help you manage your *account.*",
+    "p1": "Risk management in trading isn’t a side topic for us. It’s the method. This is what a trading day looks like when every decision is planned before the click.",
+    "h31": "Every trade, planned the same way",
+    "p2": "Structure, entry zone, a risk check, a stop-loss and then the post in Telegram. The same five steps, in the same order, every time.",
+    "h32": "Trade when the market is awake",
+    "p3": "We focus on the busiest hours, when gold moves cleanly and spreads tend to be tighter.",
+    "h33": "Position sizing",
+    "p4": "Size comes from the stop distance, so each loss stays small and planned.",
+    "h34": "No checklist, no trade",
+    "h35": "See the plan used in real time",
+    "p5": "We go live to mark levels, take or skip trades and answer your questions as we go. Losing trades are explained the same way as winners."
+  },
+  "telegram": {
+    "h21": "Our Telegram *group.*",
+    "p1": "Trading signals on Telegram are only useful if you understand them. Ours come with the plan and the reasoning, so every post teaches you something.",
+    "h31": "Trade entries, in full",
+    "p2": "Entry, stop-loss, target and risk, posted as we take the trade.",
+    "h32": "Daily analysis",
+    "p3": "The gold and silver levels we’re watching before each session, plus Bitcoin and Ethereum when they’re on the radar.",
+    "h33": "Trade reviews",
+    "p4": "What worked, what didn’t and what we’d change, including the losses.",
+    "h34": "Community",
+    "p5": "Ask questions, share your journal and get alerts when we go live."
+  },
+  "start": {
+    "h21": "How to start *trading.*",
+    "p1": "Three steps, in order. Use the slider to see what a small, fixed risk looks like on your account.",
+    "h31": "Watch",
+    "p2": "See how a trade is planned before you risk anything.",
+    "h32": "Learn",
+    "p3": "Join the community and follow the full process every day.",
+    "h33": "Trade with [Broker name]",
+    "p4": "The broker we use on our lives. Practise on demo, then go live small.",
+    "p5": "Disclosure: LTE may receive a commission if you open an account using our link. Always check a broker’s regulation yourself."
+  },
+  "section8": {
+    "h21": "What members *say.*",
+    "p1": "Reviews describe individual experiences. They are not typical results and do not guarantee any outcome."
+  },
+  "section9": {
+    "h21": "Every entry, on the *record.*",
+    "p1": "Join the Telegram for entries and analysis, and watch the whole process live on TikTok.",
+    "p2": "Educational content, not financial advice. Trading involves significant risk."
+  }
+}

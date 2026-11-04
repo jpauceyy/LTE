@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Content Manager | Learn Try Earn</title>
+<link rel="icon" type="image/png" href="/assets/img/favicon.png">
+<script>window.CMS_MANUAL_INIT = true;</script>
+<script src="https://unpkg.com/decap-cms@3.17.1/dist/decap-cms.js"></script>
+</head>
+<body>
+<script>
+  // Log in through this site's own /api/auth (GitHub OAuth on Vercel); everything else comes from config.yml.
+  CMS.init({ config: { backend: { base_url: location.origin } } });
+</script>
+</body>
+</html>

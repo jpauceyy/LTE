@@ -10,7 +10,7 @@
 
   FIND & REPLACE before going live:
     HOMEPAGE_LINK (currently the published homepage URL) -> /    and links ending #section -> /#section
-    https://t.me/YOUR_TELEGRAM, https://www.tiktok.com/@YOUR_TIKTOK, https://YOUR-BROKER-LINK.com, https://www.YOUR-DOMAIN.com
+    {{telegram_url}}, {{tiktok_url}}, {{broker_url}}, {{site_url}}
     [Add a photo of Luke] -> replace the portrait placeholder with a real photo (alt: "Luke, founder of Learn Try Earn")
 
   SEO SHEET
@@ -22,17 +22,17 @@
 -->
 <title>About Luke, Founder of Learn Try Earn | LTE</title>
 <meta name="description" content="Meet Luke, an independent trader for nearly 10 years. See how Learn Try Earn approaches gold, silver, Bitcoin and Ethereum with a plan and risk first.">
-<link rel="canonical" href="https://www.YOUR-DOMAIN.com/about/">
+<link rel="canonical" href="{{site_url}}/about/">
 <meta name="theme-color" content="#040A18">
 <meta name="color-scheme" content="dark">
 <meta property="og:type" content="website">
 <meta property="og:title" content="About Luke, Founder of Learn Try Earn | LTE">
 <meta property="og:description" content="Nearly 10 years of independent trading, focused on gold and silver. Meet the trader behind Learn Try Earn.">
-<meta property="og:url" content="https://www.YOUR-DOMAIN.com/about/">
+<meta property="og:url" content="{{site_url}}/about/">
 <meta property="og:locale" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" href="/assets/img/favicon.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"AboutPage","name":"About Luke, Founder of Learn Try Earn","url":"https://www.YOUR-DOMAIN.com/about/","mainEntity":{"@type":"Person","name":"Luke","jobTitle":"Founder","worksFor":{"@type":"Organization","name":"Learn Try Earn","url":"https://www.YOUR-DOMAIN.com/"}}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"AboutPage","name":"About Luke, Founder of Learn Try Earn","url":"{{site_url}}/about/","mainEntity":{"@type":"Person","name":"Luke","jobTitle":"Founder","worksFor":{"@type":"Organization","name":"Learn Try Earn","url":"{{site_url}}/"}}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
@@ -55,10 +55,10 @@
 <header class="hdr">
   <div class="wrap">
     <a class="logo" href="/" target="_top" aria-label="Learn Try Earn home"><span class="lte-mark m-hdr" aria-hidden="true"><i class="m-l"></i><i class="m-a"></i></span></a>
-    <nav class="nav" aria-label="Main"><a href="/" target="_top">Home</a><a href="#story">Story</a><a href="#focus">Focus</a><a href="#approach">Approach</a><a href="#goal">Goal</a></nav>
+    <nav class="nav" aria-label="Main"><a href="/" target="_top">Home</a><a href="/about/" target="_top" aria-current="page">About</a><a href="/get-started/" target="_top">Get started</a><a href="/contact/" target="_top">Contact</a></nav>
     <div class="hdr-r">
-      <a class="pill" href="https://www.tiktok.com/@YOUR_TIKTOK" rel="noopener" target="_blank" style="text-decoration:none"><i aria-hidden="true"></i>Live on TikTok</a>
-      <a class="btn btn-lime" href="https://t.me/YOUR_TELEGRAM" rel="noopener" target="_blank">Join Telegram</a>
+      <a class="pill" href="{{tiktok_url}}" rel="noopener" target="_blank" style="text-decoration:none"><i aria-hidden="true"></i>Live on TikTok</a>
+      <a class="btn btn-lime" href="{{telegram_url}}" rel="noopener" target="_blank">Join Telegram</a>
     </div>
   </div>
 </header>
@@ -69,11 +69,11 @@
     <div>
       <nav class="crumbs" aria-label="Breadcrumb"><a href="/" target="_top">Home</a><span aria-hidden="true">/</span><span aria-current="page">About</span></nav>
       <span class="pill"><i aria-hidden="true"></i>Founder of Learn Try Earn</span>
-      <h1 id="h1" data-rise>Meet Luke, the trader behind Learn Try <em>Earn.</em></h1>
-      <p class="sub" data-rise>I’m Luke, the founder of Learn Try Earn, and I’ve been trading independently for nearly 10 years. I created this platform to share my experience, explain the markets I trade and help others build a clearer understanding of trading.</p>
+      <h1 data-cms="top.h11" id="h1" data-rise>Meet Luke, the trader behind Learn Try <em>Earn.</em></h1>
+      <p data-cms="top.p1" class="sub" data-rise>I’m Luke, the founder of Learn Try Earn, and I’ve been trading independently for nearly 10 years. I created this platform to share my experience, explain the markets I trade and help others build a clearer understanding of trading.</p>
       <div class="btns" data-rise>
-        <a class="btn btn-lime" href="https://t.me/YOUR_TELEGRAM" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.4 4.3 2.9 11.5c-1.1.4-1 1.9.1 2.2l4.6 1.4 1.8 5.5c.3.9 1.4 1.1 2 .4l2.6-2.6 4.9 3.6c.7.5 1.7.1 1.9-.8l3-14.9c.2-1-.8-1.9-1.8-1.5Z"/></svg>Join our Telegram</a>
-        <a class="btn btn-line" href="https://www.tiktok.com/@YOUR_TIKTOK" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Watch us live on TikTok</a>
+        <a class="btn btn-lime" href="{{telegram_url}}" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.4 4.3 2.9 11.5c-1.1.4-1 1.9.1 2.2l4.6 1.4 1.8 5.5c.3.9 1.4 1.1 2 .4l2.6-2.6 4.9 3.6c.7.5 1.7.1 1.9-.8l3-14.9c.2-1-.8-1.9-1.8-1.5Z"/></svg>Join our Telegram</a>
+        <a class="btn btn-line" href="{{tiktok_url}}" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Watch us live on TikTok</a>
       </div>
     </div>
     <div data-rise>
@@ -92,14 +92,14 @@
 <section class="sec" id="story" data-aurora="0" aria-labelledby="story-h" style="padding-top:0">
   <div class="wrap">
     <div class="head" data-rise>
-      <h2 id="story-h">From the trading floor to trading <em>independently.</em></h2>
-      <p>How nearly 10 years of independent trading began, and why it shapes the way Learn Try Earn teaches.</p>
+      <h2 data-cms="story.h21" id="story-h">From the trading floor to trading <em>independently.</em></h2>
+      <p data-cms="story.p1">How nearly 10 years of independent trading began, and why it shapes the way Learn Try Earn teaches.</p>
     </div>
     <ol class="story" data-line>
-      <li class="chap" data-rise><span class="dot" aria-hidden="true"></span><span class="k">The ambition</span><h3>A seat on a London trading <em>floor.</em></h3><p>My interest in financial markets originally led me to consider a career in investment banking in London, with the ambition of working on a trading floor. I was drawn to the analytical thinking, fast-moving environment and challenge of making decisions as markets responded to events around the world.</p></li>
-      <li class="chap" data-rise><span class="dot" aria-hidden="true"></span><span class="k">The decision</span><h3>Choosing to trade <em>independently.</em></h3><p>As I considered the direction I wanted my life to take, I decided that trading independently was a better fit for me. It offered the freedom to develop my own approach and build my working life around my priorities, while taking responsibility for my own decisions.</p></li>
-      <li class="chap" data-rise><span class="dot" aria-hidden="true"></span><span class="k">The responsibility</span><h3>Independence comes with <em>accountability.</em></h3><p>You have to establish your own structure, question your judgement and accept the consequences when an idea does not work out.</p></li>
-      <li class="chap" data-rise><span class="dot" aria-hidden="true"></span><span class="k">Today</span><h3>Learn Try <em>Earn.</em></h3><p>Those principles shape the approach I want to share through Learn Try Earn: explaining the markets I trade and helping you build a clearer understanding of trading.</p></li>
+      <li class="chap" data-rise><span class="dot" aria-hidden="true"></span><span data-cms="story.span1" class="k">The ambition</span><h3 data-cms="story.h31">A seat on a London trading <em>floor.</em></h3><p data-cms="story.p2">My interest in financial markets originally led me to consider a career in investment banking in London, with the ambition of working on a trading floor. I was drawn to the analytical thinking, fast-moving environment and challenge of making decisions as markets responded to events around the world.</p></li>
+      <li class="chap" data-rise><span class="dot" aria-hidden="true"></span><span data-cms="story.span2" class="k">The decision</span><h3 data-cms="story.h32">Choosing to trade <em>independently.</em></h3><p data-cms="story.p3">As I considered the direction I wanted my life to take, I decided that trading independently was a better fit for me. It offered the freedom to develop my own approach and build my working life around my priorities, while taking responsibility for my own decisions.</p></li>
+      <li class="chap" data-rise><span class="dot" aria-hidden="true"></span><span data-cms="story.span3" class="k">The responsibility</span><h3 data-cms="story.h33">Independence comes with <em>accountability.</em></h3><p data-cms="story.p4">You have to establish your own structure, question your judgement and accept the consequences when an idea does not work out.</p></li>
+      <li class="chap" data-rise><span class="dot" aria-hidden="true"></span><span data-cms="story.span4" class="k">Today</span><h3 data-cms="story.h34">Learn Try <em>Earn.</em></h3><p data-cms="story.p5">Those principles shape the approach I want to share through Learn Try Earn: explaining the markets I trade and helping you build a clearer understanding of trading.</p></li>
     </ol>
   </div>
 </section>
@@ -107,13 +107,13 @@
 <section class="sec" aria-labelledby="prin-h" data-aurora="0" style="padding-top:0">
   <div class="wrap">
     <div class="head" data-rise>
-      <h2 id="prin-h">The principles behind the <em>process.</em></h2>
-      <p>Trading on your own means nobody else sets the rules. These three come first.</p>
+      <h2 data-cms="section3.h21" id="prin-h">The principles behind the <em>process.</em></h2>
+      <p data-cms="section3.p1">Trading on your own means nobody else sets the rules. These three come first.</p>
     </div>
     <div class="prin-grid">
-      <article class="prin glass tilt" data-rise><svg viewBox="0 0 40 40" fill="none" stroke="#4A9CFF" stroke-width="1.6" aria-hidden="true"><rect x="6" y="6" width="28" height="28" rx="4"/><path d="M6 16h28M16 16v18"/></svg><h3>Establish your own structure</h3><p>Decide what you trade, what you’re looking for and how much you’re prepared to risk before the market gives you a reason to act.</p></article>
-      <article class="prin glass tilt" data-rise><svg viewBox="0 0 40 40" fill="none" stroke="#4A9CFF" stroke-width="1.6" aria-hidden="true"><circle cx="17" cy="17" r="10"/><path d="m25 25 9 9M14 14.5a3.2 3.2 0 1 1 4.5 3c-1 .5-1.5 1.2-1.5 2.3M17 23h.01"/></svg><h3>Question your judgement</h3><p>Test every idea against the chart and the plan. Feeling confident is not a reason to enter a trade.</p></article>
-      <article class="prin glass tilt" data-rise><svg viewBox="0 0 40 40" fill="none" stroke="#4A9CFF" stroke-width="1.6" aria-hidden="true"><path d="M20 5 33 10v9c0 8-5.6 13.4-13 16-7.4-2.6-13-8-13-16v-9Z"/><path d="m14 20 4 4 8-9"/></svg><h3>Accept the consequences</h3><p>Some ideas won’t work out. Planning the downside first means a loss is an outcome you prepared for, not a surprise.</p></article>
+      <article class="prin glass tilt" data-rise><svg viewBox="0 0 40 40" fill="none" stroke="#4A9CFF" stroke-width="1.6" aria-hidden="true"><rect x="6" y="6" width="28" height="28" rx="4"/><path d="M6 16h28M16 16v18"/></svg><h3 data-cms="section3.h31">Establish your own structure</h3><p data-cms="section3.p2">Decide what you trade, what you’re looking for and how much you’re prepared to risk before the market gives you a reason to act.</p></article>
+      <article class="prin glass tilt" data-rise><svg viewBox="0 0 40 40" fill="none" stroke="#4A9CFF" stroke-width="1.6" aria-hidden="true"><circle cx="17" cy="17" r="10"/><path d="m25 25 9 9M14 14.5a3.2 3.2 0 1 1 4.5 3c-1 .5-1.5 1.2-1.5 2.3M17 23h.01"/></svg><h3 data-cms="section3.h32">Question your judgement</h3><p data-cms="section3.p3">Test every idea against the chart and the plan. Feeling confident is not a reason to enter a trade.</p></article>
+      <article class="prin glass tilt" data-rise><svg viewBox="0 0 40 40" fill="none" stroke="#4A9CFF" stroke-width="1.6" aria-hidden="true"><path d="M20 5 33 10v9c0 8-5.6 13.4-13 16-7.4-2.6-13-8-13-16v-9Z"/><path d="m14 20 4 4 8-9"/></svg><h3 data-cms="section3.h33">Accept the consequences</h3><p data-cms="section3.p4">Some ideas won’t work out. Planning the downside first means a loss is an outcome you prepared for, not a surprise.</p></article>
     </div>
   </div>
 </section>
@@ -121,14 +121,14 @@
 <section class="sec" id="focus" data-aurora="0" aria-labelledby="focus-h" style="padding-top:0">
   <div class="wrap">
     <div class="head" data-rise>
-      <h2 id="focus-h">What I focus <em>on.</em></h2>
-      <p>My main focus is precious metals, particularly gold and silver. These are the markets I spend most of my time following and trading, and they sit at the centre of this platform’s educational content.</p>
+      <h2 data-cms="focus.h21" id="focus-h">What I focus <em>on.</em></h2>
+      <p data-cms="focus.p1">My main focus is precious metals, particularly gold and silver. These are the markets I spend most of my time following and trading, and they sit at the centre of this platform’s educational content.</p>
     </div>
     <div class="focus">
       <article class="fcard glass tilt primary" data-rise>
         <span class="ftag" style="align-self:flex-start">Main focus</span>
-        <h3>Precious <em>metals.</em></h3>
-        <p>Gold and silver are where most of my time, analysis and trading goes, and where most of what you’ll learn here is centred.</p>
+        <h3 data-cms="focus.h31">Precious <em>metals.</em></h3>
+        <p data-cms="focus.p2">Gold and silver are where most of my time, analysis and trading goes, and where most of what you’ll learn here is centred.</p>
         <div class="metals" role="img" aria-label="Candlestick sparklines for gold and silver">
           <div class="metal"><span class="mono">XAUUSD</span><b>Gold</b><svg id="sparkG" viewBox="0 0 440 110" preserveAspectRatio="none" class="spark" aria-hidden="true"></svg></div>
           <div class="metal"><span class="mono">XAGUSD</span><b>Silver</b><svg id="sparkS" viewBox="0 0 440 110" preserveAspectRatio="none" class="spark" aria-hidden="true"></svg></div>
@@ -137,8 +137,8 @@
       </article>
       <article class="fcard glass tilt" data-rise>
         <span class="ftag dim" style="align-self:flex-start">Occasional</span>
-        <h3>Bitcoin and <em>Ethereum.</em></h3>
-        <p>Alongside precious metals, I also trade cryptocurrency occasionally. These form a smaller part of my trading activity.</p>
+        <h3 data-cms="focus.h32">Bitcoin and <em>Ethereum.</em></h3>
+        <p data-cms="focus.p3">Alongside precious metals, I also trade cryptocurrency occasionally. These form a smaller part of my trading activity.</p>
         <div class="metals" role="img" aria-label="Candlestick sparklines for Bitcoin and Ethereum">
           <div class="metal"><span class="mono">BTCUSD</span><svg id="sparkB" viewBox="0 0 240 60" preserveAspectRatio="none" class="spark" aria-hidden="true"></svg></div>
           <div class="metal"><span class="mono">ETHUSD</span><svg id="sparkE" viewBox="0 0 240 60" preserveAspectRatio="none" class="spark" aria-hidden="true"></svg></div>
@@ -152,13 +152,13 @@
 <section class="sec" id="approach" data-aurora="0" aria-labelledby="approach-h" style="padding-top:0">
   <div class="wrap">
     <div class="head" data-rise>
-      <h2 id="approach-h">Approaching a market with a <em>plan.</em></h2>
-      <p>The aim is to help you understand how to approach these markets with a plan, before any money is at risk.</p>
+      <h2 data-cms="approach.h21" id="approach-h">Approaching a market with a <em>plan.</em></h2>
+      <p data-cms="approach.p1">The aim is to help you understand how to approach these markets with a plan, before any money is at risk.</p>
     </div>
     <div class="steps3">
-      <article class="step3 glass tilt" data-rise><span class="n">01</span><h3>What to look for</h3><p>The structure, levels and conditions that make gold and silver worth watching on a given day.</p></article>
-      <article class="step3 glass tilt" data-rise><span class="n">02</span><h3>How to assess an opportunity</h3><p>Weigh a potential setup against your plan, the wider context and how clearly the chart supports it.</p></article>
-      <article class="step3 glass tilt" data-rise><span class="n">03</span><h3>The downside, before you enter</h3><p>Decide where you’re wrong and how much you’re prepared to lose before you open a position.</p></article>
+      <article class="step3 glass tilt" data-rise><span class="n">01</span><h3 data-cms="approach.h31">What to look for</h3><p data-cms="approach.p2">The structure, levels and conditions that make gold and silver worth watching on a given day.</p></article>
+      <article class="step3 glass tilt" data-rise><span class="n">02</span><h3 data-cms="approach.h32">How to assess an opportunity</h3><p data-cms="approach.p3">Weigh a potential setup against your plan, the wider context and how clearly the chart supports it.</p></article>
+      <article class="step3 glass tilt" data-rise><span class="n">03</span><h3 data-cms="approach.h33">The downside, before you enter</h3><p data-cms="approach.p4">Decide where you’re wrong and how much you’re prepared to lose before you open a position.</p></article>
     </div>
   </div>
 </section>
@@ -166,14 +166,14 @@
 <section class="sec" id="goal" data-aurora="0" aria-labelledby="goal-h" style="padding-top:0">
   <div class="wrap">
     <div class="lime-panel" id="limePanel">
-      <h2 id="goal-h">The goal of Learn Try Earn</h2>
-      <p class="big" id="bigText">A practical understanding of financial markets, with gold and silver at the centre and Bitcoin and Ethereum alongside. <em>Built on a process you understand.</em></p>
-      <p class="lede-w">Whether you are starting from scratch or looking to bring more structure to your approach, the aim is to help you develop stronger foundations.</p>
+      <h2 data-cms="goal.h21" id="goal-h">The goal of Learn Try Earn</h2>
+      <p data-cms="goal.p1" class="big" id="bigText">A practical understanding of financial markets, with gold and silver at the centre and Bitcoin and Ethereum alongside. <em>Built on a process you understand.</em></p>
+      <p data-cms="goal.p2" class="lede-w">Whether you are starting from scratch or looking to bring more structure to your approach, the aim is to help you develop stronger foundations.</p>
       <div class="lime-cols four">
-        <div data-rise><h3>Understand the market</h3><p>Know what moves gold, silver and crypto, and when each is most active.</p></div>
-        <div data-rise><h3>Prepare a plan</h3><p>Decide what you’re looking for before the session starts.</p></div>
-        <div data-rise><h3>Manage risk</h3><p>Define the downside first and size every position from it.</p></div>
-        <div data-rise><h3>Review honestly</h3><p>Look back at every decision, including the ones that didn’t work.</p></div>
+        <div data-rise><h3 data-cms="goal.h31">Understand the market</h3><p data-cms="goal.p3">Know what moves gold, silver and crypto, and when each is most active.</p></div>
+        <div data-rise><h3 data-cms="goal.h32">Prepare a plan</h3><p data-cms="goal.p4">Decide what you’re looking for before the session starts.</p></div>
+        <div data-rise><h3 data-cms="goal.h33">Manage risk</h3><p data-cms="goal.p5">Define the downside first and size every position from it.</p></div>
+        <div data-rise><h3 data-cms="goal.h34">Review honestly</h3><p data-cms="goal.p6">Look back at every decision, including the ones that didn’t work.</p></div>
       </div>
     </div>
   </div>
@@ -184,9 +184,9 @@
     <div class="reality glass" data-rise>
       <span class="shield"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3 20 6v6c0 5-3.5 8-8 9.5C7.5 20 4 17 4 12V6Z"/><path d="M12 8v5M12 16h.01"/></svg></span>
       <div>
-        <h2 id="real-h">Experience doesn’t remove <em>uncertainty.</em></h2>
-        <p>Nearly 10 years of independent trading provides the background to this platform, but experience does not remove uncertainty. <strong>Losses are part of trading, and no strategy or educational service can guarantee profitability.</strong></p>
-        <p>What I want to offer is a clear, grounded learning environment where the emphasis is on knowledge, personal responsibility and developing a process you understand.</p>
+        <h2 data-cms="section7.h21" id="real-h">Experience doesn’t remove <em>uncertainty.</em></h2>
+        <p data-cms="section7.p1">Nearly 10 years of independent trading provides the background to this platform, but experience does not remove uncertainty. <strong>Losses are part of trading, and no strategy or educational service can guarantee profitability.</strong></p>
+        <p data-cms="section7.p2">What I want to offer is a clear, grounded learning environment where the emphasis is on knowledge, personal responsibility and developing a process you understand.</p>
       </div>
     </div>
   </div>
@@ -196,13 +196,13 @@
   <div class="wrap"><div class="final-card glass">
     <span class="lte-mark m-final" aria-hidden="true"><i class="m-l"></i><i class="m-a"></i></span>
     <span class="pill" data-rise><i aria-hidden="true"></i>Live on TikTok, entries on Telegram</span>
-    <h2 id="final-h" data-rise>Learn the process, <em>step by step.</em></h2>
-    <p data-rise>Join the Telegram for entries and analysis, and watch the full process live on TikTok.</p>
+    <h2 data-cms="section8.h21" id="final-h" data-rise>Learn the process, <em>step by step.</em></h2>
+    <p data-cms="section8.p1" data-rise>Join the Telegram for entries and analysis, and watch the full process live on TikTok.</p>
     <div class="btns" data-rise>
-      <a class="btn btn-lime" href="https://t.me/YOUR_TELEGRAM" rel="noopener" target="_blank">Join our Telegram</a>
-      <a class="btn btn-line" href="https://www.tiktok.com/@YOUR_TIKTOK" rel="noopener" target="_blank">Watch us live on TikTok</a>
+      <a class="btn btn-lime" href="{{telegram_url}}" rel="noopener" target="_blank">Join our Telegram</a>
+      <a class="btn btn-line" href="{{tiktok_url}}" rel="noopener" target="_blank">Watch us live on TikTok</a>
     </div>
-    <p class="mono final-note" data-rise>Educational content, not financial advice. Trading involves significant risk.</p>
+    <p data-cms="section8.p2" class="mono final-note" data-rise>Educational content, not financial advice. Trading involves significant risk.</p>
   </div></div>
 </section>
 </main>
@@ -214,20 +214,20 @@
       <div class="f-top">
         <div class="f-brand">
           <a class="logo" href="/#top" target="_top" aria-label="Learn Try Earn home"><span class="lte-mark m-ftr" aria-hidden="true"><i class="m-l"></i><i class="m-a"></i></span></a>
-          <p>A trading education community for beginners learning to trade gold and silver with structure and risk management.</p>
+          <p data-cms="settings.footer_blurb">A trading education community for beginners learning to trade gold and silver with structure and risk management.</p>
           <div class="f-social">
-            <a href="https://t.me/YOUR_TELEGRAM" rel="noopener" target="_blank" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.4 4.3 2.9 11.5c-1.1.4-1 1.9.1 2.2l4.6 1.4 1.8 5.5c.3.9 1.4 1.1 2 .4l2.6-2.6 4.9 3.6c.7.5 1.7.1 1.9-.8l3-14.9c.2-1-.8-1.9-1.8-1.5Z"/></svg></a>
-            <a href="https://www.tiktok.com/@YOUR_TIKTOK" rel="noopener" target="_blank" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 3c.4 2.3 1.9 3.8 4.4 4v3.1a8 8 0 0 1-4.4-1.3v6.4a5.8 5.8 0 1 1-5.8-5.8l.9.1v3.2a2.7 2.7 0 1 0 1.9 2.6V3h3Z"/></svg></a>
+            <a href="{{telegram_url}}" rel="noopener" target="_blank" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.4 4.3 2.9 11.5c-1.1.4-1 1.9.1 2.2l4.6 1.4 1.8 5.5c.3.9 1.4 1.1 2 .4l2.6-2.6 4.9 3.6c.7.5 1.7.1 1.9-.8l3-14.9c.2-1-.8-1.9-1.8-1.5Z"/></svg></a>
+            <a href="{{tiktok_url}}" rel="noopener" target="_blank" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 3c.4 2.3 1.9 3.8 4.4 4v3.1a8 8 0 0 1-4.4-1.3v6.4a5.8 5.8 0 1 1-5.8-5.8l.9.1v3.2a2.7 2.7 0 1 0 1.9 2.6V3h3Z"/></svg></a>
           </div>
         </div>
         <nav class="f-cols" aria-label="Footer">
-          <div><h3>Learn</h3><ul><li><a href="#top">About Luke</a></li><li><a href="/#markets" target="_top">The markets</a></li><li><a href="/#risk" target="_top">Risk management</a></li><li><a href="/#start" target="_top">How to start</a></li></ul></div>
-          <div><h3>Community</h3><ul><li><a href="/#telegram" target="_top">Telegram group</a></li><li><a href="https://www.tiktok.com/@YOUR_TIKTOK" rel="noopener" target="_blank">Live on TikTok</a></li><li><a href="/#start" target="_top">Reviews</a></li></ul></div>
-          <div><h3>Broker</h3><ul><li><a href="/#broker" target="_top">[Broker name]</a></li><li><a href="https://YOUR-BROKER-LINK.com" rel="noopener sponsored" target="_blank">Open a demo</a></li><li><a href="#">Risk disclosure</a></li></ul></div>
+          <div><h3>Learn</h3><ul><li><a href="#top">About Luke</a></li><li><a href="/#markets" target="_top">The markets</a></li><li><a href="/#risk" target="_top">Risk management</a></li><li><a href="/get-started/" target="_top">How to start</a></li></ul></div>
+          <div><h3>Community</h3><ul><li><a href="{{telegram_url}}" rel="noopener" target="_blank">Telegram group</a></li><li><a href="{{tiktok_url}}" rel="noopener" target="_blank">Live on TikTok</a></li><li><a href="/#start" target="_top">Reviews</a></li></ul></div>
+          <div><h3>Broker</h3><ul><li><a href="/#broker" target="_top">[Broker name]</a></li><li><a href="{{broker_url}}" rel="noopener sponsored" target="_blank">Open a demo</a></li><li><a href="#">Risk disclosure</a></li></ul></div>
           <div><h3>Legal</h3><ul><li><a href="#">Privacy policy</a></li><li><a href="#">Terms of use</a></li><li><a href="#">Cookie policy</a></li></ul></div>
         </nav>
       </div>
-      <p class="risk"><strong>Risk warning:</strong> Trading involves significant risk and you may lose more than your deposit. Content is educational and not financial advice. Past performance does not indicate future results. Only trade with money you can afford to lose.</p>
+      <p data-cms="settings.risk_warning" class="risk"><strong>Risk warning:</strong> Trading involves significant risk and you may lose more than your deposit. Content is educational and not financial advice. Past performance does not indicate future results. Only trade with money you can afford to lose.</p>
       <div class="f-bottom">
         <p>© 2026 Learn Try Earn. All rights reserved.</p>
         <p>Educational content, not financial advice.</p>
@@ -238,8 +238,8 @@
 </footer>
 
 <nav class="mbar" id="mbar" aria-label="Quick actions">
-  <a class="btn btn-lime" href="https://t.me/YOUR_TELEGRAM" rel="noopener" target="_blank">Join Telegram</a>
-  <a class="btn btn-line" href="https://www.tiktok.com/@YOUR_TIKTOK" rel="noopener" target="_blank">Watch live</a>
+  <a class="btn btn-lime" href="{{telegram_url}}" rel="noopener" target="_blank">Join Telegram</a>
+  <a class="btn btn-line" href="{{tiktok_url}}" rel="noopener" target="_blank">Watch live</a>
 </nav>
 
 <script src="/assets/js/main.js" defer></script>

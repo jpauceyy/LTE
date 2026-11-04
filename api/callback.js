@@ -20,12 +20,23 @@ export default async function handler(req, res) {
   const message = JSON.stringify(`authorization:github:${status}:${JSON.stringify(payload)}`);
   res.setHeader('Set-Cookie', 'decap_oauth_state=; Path=/api; Max-Age=0');
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
-  res.send(`<!doctype html><title>Logging in…</title><p>Logging in…</p><script>
+  const errText = status === 'error' ? payload.error : '';
+  res.send(`<!doctype html><meta charset="utf-8"><title>Logging in…</title>
+<style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#040A18;color:#E6EEFF;font:16px/1.5 system-ui,sans-serif;text-align:center;padding:24px}p{max-width:36ch}small{color:#9EAED0}</style>
+<div><p id="m">Logging in…</p><small id="s"></small></div><script>
 (function(){
-  var origin = location.origin;
-  function receive(e){ if (e.origin !== origin) return; window.opener.postMessage(${message}, origin); window.removeEventListener('message', receive); }
+  var origin = location.origin, msg = ${message}, err = ${JSON.stringify(errText)};
+  var m = document.getElementById('m'), s = document.getElementById('s');
+  if (err) { m.textContent = err; }
+  if (!window.opener) {
+    m.textContent = err || 'You are signed in to GitHub, but this window lost its link to the Content Manager tab.';
+    s.textContent = 'Close this window, open learntryearn.vercel.app/admin directly in a normal (not private) window, turn off privacy or popup-blocking extensions for this site, and click Login with GitHub again.';
+    return;
+  }
+  function receive(e){ if (e.origin !== origin) return; window.opener.postMessage(msg, origin); window.removeEventListener('message', receive); if (!err) setTimeout(function(){ window.close(); }, 400); }
   window.addEventListener('message', receive);
-  window.opener && window.opener.postMessage('authorizing:github', origin);
+  window.opener.postMessage('authorizing:github', origin);
+  setTimeout(function(){ s.textContent = 'Still here? Close this window and click Login with GitHub again. If it keeps happening, try a different browser.'; }, 6000);
 })();
 </script>`);
 }
